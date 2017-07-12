@@ -7,6 +7,8 @@ var green = Math.floor((Math.random()* 12) + 1);
 var red = Math.floor((Math.random()* 12) + 1);
 var blue = Math.floor((Math.random()* 12) + 1);
 
+
+
 //updates scoreDisplay in html
 var scoreDisplayNum = function (){
 	$('#scoreDisplay').empty();
@@ -17,7 +19,21 @@ var scoreDisplayNum = function (){
 	$('#losses').append(losses);
 }
 
-//restart function
+var arr = function (){
+	if (scoreDisplay === totalNum) {
+		wins = wins + 1;
+		restart();
+	}else if(scoreDisplay > totalNum){
+		losses = losses + 1;
+		restart();
+	}else{
+		scoreDisplayNum();
+	}
+}
+
+
+
+// use the restart function
 var restart = function(){
 	scoreDisplay = 0;
     totalNum = Math.floor((Math.random()* 100) + 19);
@@ -33,25 +49,13 @@ var restart = function(){
 	scoreDisplayNum();
 }
 
-
-var arr = function (){
-	if (scoreDisplay == totalNum) {
-		wins = wins + 1;
-		restart();
-	}else if(scoreDisplay > totalNum){
-		losses = losses + 1;
-		restart();
-	}else{
-		scoreDisplayNum();
-	}
-}
-
-$('#totalNum').append(totalNum);
-
-$('#scoreDisplay').append(scoreDisplay);
 //function
 
 $(document).ready(function(){
+	
+	$('#totalNum').append(totalNum);
+	$('#scoreDisplay').append(scoreDisplay);
+	
 	$('#red').click(function(){
 		scoreDisplay = scoreDisplay + red;
 		arr();
